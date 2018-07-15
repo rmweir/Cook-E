@@ -24,13 +24,15 @@ app.get('/new_recipe/:body', function(req, res) {
       console.log("error")
     else {
       var collection = client.db('recipes');
+      console.log(collection);
       let insert = {
         //recipe_title: title,
         //recipe_author: author,
         //recipe_cooktime: cooktime,
         recipe_body: body
       }      
-      collection.save(insert, function(err, data) {
+      collection.insertOne(insert);
+      collection.insertOne(insert, function(err, data) {
         if (err) {console.log("cannot insert object");}
         else {
           res.state(200).type('txt').send(insert);
