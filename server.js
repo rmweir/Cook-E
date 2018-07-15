@@ -12,18 +12,19 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.post('/new_recipe/', function(req, response) {
+app.get('/new_recipe/', function(req, response) {
   var MC = mongodb.MongoClient;
-  var title = req.title
-  var author = req.author
-  var cooktime = req.cooktime
-  var body = req.body
-
-  MC.connect(dburl, function err, db) {
+  var title = req.title;
+  var author = req.author;
+  var cooktime = req.cooktime;
+  var body = req.body;
+  console.log("enter");
+  MC.connect(dburl, function (err, db) {
     if (err) 
       console.log("error")
     else {
-      var collection = db.collection()
+      var collection = db.collection('recipes');
+      console.log("eyyy");
     }
   }
   
