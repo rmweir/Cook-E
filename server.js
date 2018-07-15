@@ -17,30 +17,20 @@ app.get('/new_recipe/:body', function(req, res) {
   //var title = req.title;
   //var author = req.author;
   //var cooktime = req.cooktime;
-  var body = req.body;
+  var body = req.params.body;
   console.log("enter");
   MC.connect(dburl, function (err, client) {
     if (err) 
       console.log("error")
     else {
       var collection = client.db('cook-e');
-      // client.db('cook-e').collection('recipes').insertOne({a:2});
       console.log(collection);
       let insert = {
-        //recipe_title: title,
-        //recipe_author: author,
-        //recipe_cooktime: cooktime,
-        recipe_body: 'fdasf' 
+        recipe_body: body 
       }      
 
       client.db('cook-e').collection('recipes').insertOne(insert);
-      //collection.recipes.insertOne(insert);
-      //collection.insertOne(insert, function(err, data) {
-      //  if (err) {console.log("cannot insert object");}
-      //  else {
-      //    res.state(200).type('txt').send(insert);
-      //  }
-      // }); 
+      res.status(200).type('txt').send(insert);
       console.log("eyyy");
     }
   });
