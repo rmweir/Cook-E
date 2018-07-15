@@ -25,7 +25,7 @@ app.get('/new_recipe/:title/:author/:cooktime/:body/', function(req, res) {
     else {
       let collection = client.db('cook-e');
       let insert = {
-        recipe_id: Date.now,
+        recipe_create_time: Date.now(),
         recipe_title: title,
         recipe_author: author,
         recipe_cooktime: cooktime,
@@ -52,8 +52,7 @@ app.get('/edit_recipe/:id/:body', function(req, res) {
 });
 
 
-
-// listen for requests :)
+// listening
 var listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+  console.log('Port: ' + listener.address().port);
 });
