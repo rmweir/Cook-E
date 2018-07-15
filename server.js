@@ -23,7 +23,7 @@ app.get('/new_recipe/', function(req, response) {
     if (err) 
       console.log("error")
     else {
-      var collection = client.db.collection('recipes');
+      var collection = client.db('recipes');
       console.log("eyyy");
     }
   });
