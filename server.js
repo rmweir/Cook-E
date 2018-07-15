@@ -12,11 +12,11 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get('/new_recipe/', function(req, response) {
+app.get('/new_recipe/:body', function(req, res) {
   var MC = mongodb.MongoClient;
-  var title = req.title;
-  var author = req.author;
-  var cooktime = req.cooktime;
+  //var title = req.title;
+  //var author = req.author;
+  //var cooktime = req.cooktime;
   var body = req.body;
   console.log("enter");
   MC.connect(dburl, function (err, client) {
@@ -24,6 +24,18 @@ app.get('/new_recipe/', function(req, response) {
       console.log("error")
     else {
       var collection = client.db('recipes');
+      let insert = {
+        //recipe_title: title,
+        //recipe_author: author,
+        //recipe_cooktime: cooktime,
+        recipe_body: body
+      }      
+      collection.insert(insert, function(err, data) {
+        if (err) {console.log("cannot insert object");}
+        else {
+          res.state(200).type('txt').send(insert);
+        }
+      }); 
       console.log("eyyy");
     }
   });
