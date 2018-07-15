@@ -1,23 +1,18 @@
-// server.js
-// where your node app starts
-
-// init project
 var express = require('express');
 var app = express();
 var mongodb = require('mongodb');
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+// mlab url for mongo database
+var dburl = process.env.CONNECTION;
 
-// http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-// http://expressjs.com/en/starter/basic-routing.html
+// Beginning of routing section
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.post('/', function(req, response) {
+app.post('/new_recipe/', function(req, response) {
   var MC = mongodb.MongoClient;
   var title = req.title
   var author = req.author
