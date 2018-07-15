@@ -41,10 +41,12 @@ app.get('/edit_recipe/:id/:body', function(req, res) {
   var MC = mongodb.MongoClient;
   var id = req.params.id;
   var body = req.params.body;
-  client.db('cook-e').collection('recipes').findOneAndUpdate({recipe_body: "asdf"}, {$set: {
-    recipe_body: body}});
-);
-}
+  MC.connect(dburl, function (err, client) {  
+    client.db('cook-e').collection('recipes').findOneAndUpdate({recipe_body: "asdf"}, {$set: {
+      recipe_body: body}});
+  });
+});
+
 
 
 // listen for requests :)
