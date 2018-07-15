@@ -3,7 +3,7 @@ var app = express();
 var mongodb = require('mongodb');
 
 // mlab url for mongo database
-var dburl = process.env.MONGO_DB;
+const dburl = process.env.MONGO_DB;
 
 app.use(express.static('public'));
 
@@ -12,20 +12,23 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get('/new_recipe/:body', function(req, res) {
-  var MC = mongodb.MongoClient;
-  //var title = req.title;
-  //var author = req.author;
-  //var cooktime = req.cooktime;
-  var body = req.params.body;
-  console.log("enter");
+app.get('/new_recipe/:title/:author/:cooktime/:body/', function(req, res) {
+  const MC = mongodb.MongoClient;
+  const title = req.params.title;
+  const author = req.params.author;
+  const cooktime = req.params.cooktime;
+  const body = req.params.body;
+  
   MC.connect(dburl, function (err, client) {
     if (err) 
       console.log("error")
     else {
-      var collection = client.db('cook-e');
-      console.log(collection);
+      let collection = client.db('cook-e');
       let insert = {
+        recipe_id: Date.now,
+        recipe_title: title,
+        recipe_author: author,
+        recipe_cooktime: cooktime,
         recipe_body: body 
       }      
 
@@ -38,9 +41,10 @@ app.get('/new_recipe/:body', function(req, res) {
 });
 
 app.get('/edit_recipe/:id/:body', function(req, res) {
-  var MC = mongodb.MongoClient;
-  var id = req.params.id;
-  var body = req.params.body;
+  const MC = mongodb.MongoClient;
+  const id = req.params.id;
+  const body = req.params.body;
+  
   MC.connect(dburl, function (err, client) {  
     client.db('cook-e').collection('recipes').findOneAndUpdate({recipe_body: "asdf"}, {$set: {
       recipe_body: body}});
