@@ -23,7 +23,8 @@ app.get('/new_recipe/:body', function(req, res) {
     if (err) 
       console.log("error")
     else {
-      var collection = client.db('recipes');
+      var collection = client.db('cook-e');
+      client.db('cook-e').collection('recipes').insertOne({a:2});
       console.log(collection);
       let insert = {
         //recipe_title: title,
@@ -31,7 +32,7 @@ app.get('/new_recipe/:body', function(req, res) {
         //recipe_cooktime: cooktime,
         recipe_body: body
       }      
-      collection.insertOne(insert);
+      collection.recipes.insertOne(insert);
       collection.insertOne(insert, function(err, data) {
         if (err) {console.log("cannot insert object");}
         else {
