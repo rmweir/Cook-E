@@ -30,7 +30,7 @@ app.get('/new_recipe/:body', function(req, res) {
         //recipe_cooktime: cooktime,
         recipe_body: body
       }      
-      client.db.recipes.insert(insert, function(err, data) {
+      collection.save(insert, function(err, data) {
         if (err) {console.log("cannot insert object");}
         else {
           res.state(200).type('txt').send(insert);
