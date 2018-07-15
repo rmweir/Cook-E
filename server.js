@@ -4,6 +4,7 @@
 // init project
 var express = require('express');
 var app = express();
+var mongodb = require('mongodb');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -17,12 +18,20 @@ app.get('/', function(request, response) {
 });
 
 app.post('/', function(req, response) {
+  var MC = mongodb.MongoClient;
   var title = req.title
   var author = req.author
   var cooktime = req.cooktime
   var body = req.body
 
-  response
+  MC.connect(dburl, function err, db) {
+    if (err) 
+      console.log("error")
+    else {
+      var collection = db.collection()
+    }
+  }
+  
 });
 
 
