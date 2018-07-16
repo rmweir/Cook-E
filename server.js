@@ -8,10 +8,21 @@ const dburl = process.env.MONGO_DB;
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 // Beginning of routing section
+
+app.get('/', (req, res) => {
+  const MC = mongodb.MongoClient;
+
+  client.db('cook-e').collection('recipes').find().toArray((err, result) => {
+    if (err) return console.log(err);
+    res.render('index.ejs', {recipes: result})
+  });
+});
+
+/*
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
-
+*/
 app.get('/new_recipe/:title/:author/:cooktime/:body/', function(req, res) {
   const MC = mongodb.MongoClient;
   const title = req.params.title;
