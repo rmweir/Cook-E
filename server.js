@@ -6,7 +6,7 @@ var mongodb = require('mongodb');
 const dburl = process.env.MONGO_DB;
 
 app.use(express.static('public'));
-
+app.set('view engine', 'ejs');
 // Beginning of routing section
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
