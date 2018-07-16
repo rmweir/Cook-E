@@ -46,7 +46,7 @@ app.get('/edit_recipe/:id/:body', function(req, res) {
   const body = req.params.body;
   
   MC.connect(dburl, function (err, client) {  
-    client.db('cook-e').collection('recipes').findOneAndUpdate({recipe_create_time: 1531698139252}, {$set: {
+    client.db('cook-e').collection('recipes').findOneAndUpdate({recipe_create_time: parseInt(id)}, {$set: {
       recipe_body: body}});
   });
 });
