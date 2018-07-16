@@ -1,41 +1,58 @@
-// server.js
-// where your node app starts
-
-// init project
 var express = require('express');
 var app = express();
 var mongodb = require('mongodb');
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+// mlab url for mongo database
+const dburl = process.env.MONGO_DB;
 
-// http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-// http://expressjs.com/en/starter/basic-routing.html
+// Beginning of routing section
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.post('/', function(req, response) {
-  var MC = mongodb.MongoClient;
-  var title = req.title
-  var author = req.author
-  var cooktime = req.cooktime
-  var body = req.body
-
-  MC.connect(dburl, function err, db) {
+app.get('/new_recipe/:title/:author/:cooktime/:body/', function(req, res) {
+  const MC = mongodb.MongoClient;
+  const title = req.params.title;
+  const author = req.params.author;
+  const cooktime = req.params.cooktime;
+  const body = req.params.body;
+  
+  MC.connect(dburl, function (err, client) {
     if (err) 
       console.log("error")
     else {
-      var collection = db.collection()
+      let collection = client.db('cook-e');
+      let insert = {
+        recipe_create_time: Date.now(),
+        recipe_title: title,
+        recipe_author: author,
+        recipe_cooktime: cooktime,
+        recipe_body: body 
+      }      
+
+      client.db('cook-e').collection('recipes').insertOne(insert);
+      res.status(200).type('txt').send(insert);
+      console.log("eyyy");
     }
-  }
+  });
   
 });
 
+app.get('/edit_recipe/:id/:body', function(req, res) {
+  const MC = mongodb.MongoClient;
+  const id = req.params.id;
+  const body = req.params.body;
+  
+  MC.connect(dburl, function (err, client) {  
+    client.db('cook-e').collection('recipes').findOneAndUpdate({recipe_create_time: parseInt(id)}, {$set: {
+      recipe_body: body}}, (err, result) => {res.status(200).type('txt').send(result);});
+  });
+});
 
-// listen for requests :)
+
+// listening
 var listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+  console.log('Port: ' + listener.address().port);
 });
