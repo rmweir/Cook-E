@@ -1,4 +1,6 @@
 dependencies:
+  bootstrap: 4.1.2
+  ejs: 2.6.1
   express: 4.16.3
   mongodb: 3.1.1
 packages:
@@ -32,6 +34,15 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha1-h2eKGdhLR9hZuDGZvVm84iKxBFQ=
+  /bootstrap/4.1.2:
+    dev: false
+    engines:
+      node: '>=6'
+    peerDependencies:
+      jquery: 1.9.1 - 3
+      popper.js: ^1.14.3
+    resolution:
+      integrity: sha512-3bP609EdMc/8EwgGp8KgpN8HwnR4V4lZ9CTi5pImMrXNxpkw7dK1B05aMwQWpG1ZWmTLlBSN/uzkuz5GsmQNFA==
   /bson/1.0.9:
     dev: false
     engines:
@@ -92,6 +103,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
+  /ejs/2.6.1:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-0xy4A/twfrRCnkhfk8ErDi5DqdAsAqeGxht4xkCUrsvhhbQNs7E+4jV0CN7+NKIY0aHE72+XvqtBIXzD31ZbXQ==
   /encodeurl/1.0.2:
     dev: false
     engines:
@@ -432,5 +449,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 8
 shrinkwrapVersion: 3
 specifiers:
+  bootstrap: ^4.1.2
+  ejs: ^2.6.1
   express: ^4.16.3
   mongodb: ^3.1.1
