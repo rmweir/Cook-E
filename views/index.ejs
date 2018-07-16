@@ -14,11 +14,13 @@
 </div>
 <ul class="recipes">
 <% for(var i=0; i<recipes.length; i++) {%>
+<div>
 <li class="recipe">
 <span><%="Author: " + recipes[i].recipe_author %></span><br>
 <span><%="Recipe: " + recipes[i].recipe_body %></span><br>
 <button type="button" class="btn btn-success"> Edit  <span class="glyphicon glyphicon-pencil"></span> </button>
 </li>
+</div>
 <% } %>
 </ul>
 <form action="/stuff" method="POST">
