@@ -11,10 +11,14 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
   const MC = mongodb.MongoClient;
+  MC.connect(dburl, function (err, client) {
 
-  client.db('cook-e').collection('recipes').find().toArray((err, result) => {
-    if (err) return console.log(err);
-    res.render('index.ejs', {recipes: result})
+
+    client.db('cook-e').collection('recipes').find().toArray((err, result) => {
+      if (err) return console.log(err);
+      res.render('index.ejs', {recipes: result})
+    });
+    
   });
 });
 
