@@ -18,9 +18,12 @@
 <div class="col-md-3"></div>
 <div class="col-md-6">
 <div class="panel panel-primary">
-<div class="panel-heading"><%="Author: " + recipes[i].recipe_author %></div><br>
+<div class="panel-heading"><%=recipes[i].recipe_title + " by " + recipes[i].recipe_author %></div><br>
+<div class="text-center"><%="Recipe: " + recipes[i].recipe_cooktime %></div><br>
 <div class="text-center"><%="Recipe: " + recipes[i].recipe_body %></div><br>
 <button type="button" class="btn btn-success"> Edit  <span class="glyphicon glyphicon-pencil"></span> </button>
+
+<button type="button" class="btn btn-danger"> Delete  <span class="glyphicon glyphicon-remove"></span> </button>
 </div>
 <div class="col-md-3"></div>
 </div>
