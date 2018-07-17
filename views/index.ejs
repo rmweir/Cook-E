@@ -12,17 +12,17 @@
 <div class="jumbotron text-center">
   <h1> Recipes </h1>
 </div>
-<ul class="recipes">
+<div class="recipes">
 <% for(var i=0; i<recipes.length; i++) {%>
-<div>
-<li class="recipe">
+<div class="panel panel-primary">
+<tr class="recipe">
 <span><%="Author: " + recipes[i].recipe_author %></span><br>
 <span><%="Recipe: " + recipes[i].recipe_body %></span><br>
 <button type="button" class="btn btn-success"> Edit  <span class="glyphicon glyphicon-pencil"></span> </button>
-</li>
+</tr>
 </div>
 <% } %>
-</ul>
+</div>
 <form action="/stuff" method="POST">
 <input type="text" placeholder="author" name="author">
 <input type="text" placeholder="recipe" name="recipe">
