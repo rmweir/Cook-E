@@ -14,12 +14,12 @@
 </div>
 <div class="recipes">
 <% for(var i=0; i<recipes.length; i++) {%>
+<div class="row">
 <div class="panel panel-primary">
-<tr class="recipe">
-<span><%="Author: " + recipes[i].recipe_author %></span><br>
-<span><%="Recipe: " + recipes[i].recipe_body %></span><br>
+<div class="panel-heading"><%="Author: " + recipes[i].recipe_author %></div><br>
+<div class="text-center"><%="Recipe: " + recipes[i].recipe_body %></div><br>
 <button type="button" class="btn btn-success"> Edit  <span class="glyphicon glyphicon-pencil"></span> </button>
-</tr>
+</div>
 </div>
 <% } %>
 </div>
